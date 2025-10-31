@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cliffdale Landfill Boundary Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 600px; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map centered near the landfill
+    var map = L.map('map').setView([35.042800, -79.054300], 16);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // 📍 Landfill marker
+    L.marker([35.042800, -79.054300]).addTo(map)
+      .bindPopup('Cliffdale Landfill<br>');
+
+    // 🔺 Custom polygon boundary
+    var boundary = [
+      [35.046087, -79.056885],
+      [35.040293558854955, -79.05126910716628],
+      [35.040530, -79.057685]
+    ];
+
+    L.polygon(boundary, {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.3
+    }).addTo(map).bindPopup('Approximate Gas Probe Boundary');
+  </script>
+</body>
+</html>
